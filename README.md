@@ -1,2 +1,1 @@
-# BrainSimulation
-LIF neurons Brain Simulation
+# brain_simulate
