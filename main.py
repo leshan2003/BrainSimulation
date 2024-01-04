@@ -30,6 +30,7 @@ def simulate_n_times(n):
             par = params(mode=mode)
             mybrain = brain(threshold=par.threshold, decay=par.decay, reset=par.reset, alpha=par.alpha, first_fire_neurons_num=par.first_fire_neurons_num)
             fire_neurons_list, fire_neurons_num = mybrain.simulate(time_step=10)
+            print(fire_neurons_num)
             if mode == 'normal':
                 normal_num_average.append(np.array(fire_neurons_num))
             elif mode == 'abnormal_decay':
@@ -67,4 +68,5 @@ def simulate_n_times(n):
     # plt.show()
 
 if __name__ == "__main__":
-    main()
+    simulate_n_times(5)
+    # main()
