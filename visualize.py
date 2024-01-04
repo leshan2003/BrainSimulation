@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
+import imageio
+import os
+from glob import glob
+from PIL import Image 
 
 
 def visualize(fire_neurons_list,mode):
@@ -27,3 +31,18 @@ def visualize(fire_neurons_list,mode):
         # 显示或存储图表
         plt.savefig(f"system/figures/{mode}/{i:0>2d}.png")
         # plt.show()
+
+def gen_GIF():
+    for mode in ['normal','abnormal_decay','abnormal_threshold','abnormal_reset']:
+        images = []
+        file_path = os.path.join('./figures/'+ mode+'/')
+        # 用glob找到file_path下所有后缀为png的文件，且不分大小写
+        for filename in sorted(glob(file_path + '*.png', recursive=True), key=os.path.getmtime):
+            images.append(Image.open(filename))
+
+        images[0].save("./figures/"+mode+"/demo.gif", format='GIF',save_all=True, append_images=images[1:], loop=5,duration=500)
+
+
+
+if __name__ == '__main__':
+    gen_GIF()
